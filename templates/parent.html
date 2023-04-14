@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="parent.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Parent Information</h1>
+        <form onSubmit={handleSubmit}>
+          <div class="father-info">
+            <h2>Father Information</h2>
+            <div class="form-group">
+              <label htmlFor="fatherName">Father's Name:</label>
+              <input type="text" id="fatherName" name="fatherName" required />
+            </div>
+            <div class="form-group">
+              <label htmlFor="fatherOccupation">Occupation:</label>
+              <input
+                type="text"
+                id="fatherOccupation"
+                name="fatherOccupation"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label htmlFor="fatherPhone">Phone Number:</label>
+              <input
+                type="tel"
+                id="fatherPhone"
+                name="fatherPhone"
+                placeholder="+91"
+                required
+              />
+            </div>
+          </div>
+          <div class="mother-info">
+            <h2>Mother Information</h2>
+            <div class="form-group">
+              <label htmlFor="motherName">Mother's Name:</label>
+              <input
+                type="text"
+                id="motherName"
+                name="motherName"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label htmlFor="motherOccupation">Occupation:</label>
+              <input
+                type="text"
+                id="motherOccupation"
+                name="motherOccupation"
+                
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label htmlFor="motherPhone">Phone Number:</label>
+              <input
+                type="tel"
+                id="motherPhone"
+                name="motherPhone"
+                
+                required
+              />
+            </div>
+          </div>
+          <h2>Contact Information</h2>
+          <div class="form-group">
+            <label htmlFor="address">Address:</label>
+            <textarea id="address" name="address" rows="2" required></textarea>
+          </div>
+          <div class="form-group">
+            <label htmlFor="pincode">Pincode:</label>
+            <input
+              type="text"
+              id="pincode"
+              name="pincode"
+              required
+              pattern="[0-9]{6}"
+            />
+          </div>
+          <button onClick=>Next</button>
+        </form>
+      </div>
+</body>
+</html>

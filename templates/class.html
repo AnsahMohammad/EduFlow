@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="class.css">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form-container" onSubmit="handleSubmit(event)">
+        <h1>Fee Payment</h1>
+        <label>
+          Class option:
+          <select id="classOption" name="classOption" onchange="handleClassOptionChange(event)">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Fee:
+          <input type="number" id="fee" name="fee" readonly />
+        </label>
+        <br />
+        <label>
+          Class name:
+          <input type="text" id="className" name="className" onchange="handleClassNameChange(event)" />
+        </label>
+        <br />
+        <label>
+          Paying fee now:
+          <input type="text" id="payingFeeNow" name="payingFeeNow" onchange="handlePayingFeeNowChange(event)" />
+        </label>
+        <br />
+        <button type="submit">Submit</button>
+      </form> 
+</body>
+</html>
