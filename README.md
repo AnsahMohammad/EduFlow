@@ -9,6 +9,9 @@ EduFlow is a web-based school management system designed to help schools manage 
 * Fee management: Manage student fees, generate invoices, accept online payments, and track payment history.
 * Library management: Manage the school library, check out and return books, track inventory, and place holds.
 
+## ER Diagram
+<img src="./ER_Map.png" />
+
 ## Getting Started
 To get started with EduFlow, follow these steps:
 Install Python 3.x and pip on your system.
