@@ -49,17 +49,13 @@ class Subject(models.Model):
     subject_name = models.CharField(max_length=20)
 
 class Grade(models.Model):
-    # grade_id = models.CharField(max_length=10)
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject_id = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    # class_id = models.ForeignKey(Class, on_delete=models.CASCADE)
     score_no = models.CharField(max_length=10)
     exam_date = models.DateField()
 
 class Fee(models.Model):
-    # fee_id
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
-    # class_id = models.ForeignKey()
     fee_amount = models.CharField(max_length=10)
     fee_type = models.CharField(max_length=10)
     payment_date = models.DateField()
