@@ -42,7 +42,7 @@
         </tr>
         {% for student in students %}
         <tr>
-            <td>{{student.addmission_no}}</td>
+            <td>{{student.addmission_no}} <a href="{% url 'edit_student' student.id %}">Edit</a></td>
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
             <td>{{student.dob}}</td>

@@ -102,3 +102,24 @@ def show(request):
         "teachers":teachers
     }
     return render(request,'show_data.html',context)
+
+def edit_student(request,pk):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        gender = request.POST.get('gender')
+        dob = request.POST.get('dob')
+        pk = request.POST.get('id')
+        stud = Student.objects.filter(id=pk)
+        for s in stud:
+            s.first_name = first_name
+            s.last_name = last_name
+            s.gender = gender
+            s.dob = dob
+            s.save()
+        return redirect('show')
+    student = Student.objects.filter(id=pk)
+    context = {
+        "students":student
+    }
+    return render(request,'edit_student.html',context)
