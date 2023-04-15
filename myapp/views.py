@@ -10,7 +10,6 @@ from .models import Class, Teacher, Subject,Student,Parent
 def index(request):
     return render(request,'index.html')
 
-
 def add_student(request):
     if request.method == "POST":
         first_name = request.POST.get('first_name')
@@ -94,3 +93,12 @@ def teacher(request):
         raise Http404('No class found to assign the teacher to')
     context = {"classes" : classes}
     return render(request,'teacherReg.html', context)
+
+def show(request):
+    students = Student.objects.all()
+    teachers = Teacher.objects.all()
+    context = {
+        "students":students,
+        "teachers":teachers
+    }
+    return render(request,'show_data.html',context)
