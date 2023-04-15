@@ -39,9 +39,12 @@ class Student(models.Model):
     address = models.CharField(max_length=50)
     phone_no = models.CharField(max_length=10)
     email = models.CharField(max_length=30)
-    addmission_date = models.DateField()
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE)
-    parent_id = models.ForeignKey(Parent, on_delete=models.CASCADE)
+    addmission_date = models.DateField(auto_now_add=True,null=True)
+    class_id = models.ForeignKey(Class, on_delete=models.CASCADE,null=True,blank=True)
+    parent_id = models.ForeignKey(Parent, on_delete=models.CASCADE,null=True,blank=True)
+
+    def __str__(self):
+        return str(self.addmission_no)
 
 class Subject(models.Model):
     teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
