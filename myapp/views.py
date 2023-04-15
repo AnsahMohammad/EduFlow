@@ -121,7 +121,7 @@ def edit_teacher(request,pk):
         gender = request.POST.get('gender')
         address = request.POST.get('address')
         salary = request.POST.get('salary')
-        hire_date = request.POST.get('hire_data')
+        hire_date = request.POST.get('hire_date')
         subject_id = request.POST.get('subject_id')
         email = request.POST.get('email')
         pk = request.POST.get('id')
@@ -139,8 +139,9 @@ def edit_teacher(request,pk):
             t.subject_id = subject_id
             t.email = email
             t.save()
+        return redirect('show')
     teacher = Teacher.objects.filter(id=pk)
     context = {
         "teacher":teacher
     }
-    return HttpResponse("template will get soon")
+    return render(request,'edit_teacher.html',context)

@@ -75,7 +75,7 @@
         </tr>
         {% for t in teachers %}
         <tr>
-            <td>{{t.id}} <a href="{% url 'edit_teacher' t.id %}"></a></td>
+            <td>{{t.id}} <a href="{% url 'edit_teacher' t.id %}">Edit</a></td>
             <td>{{t.first_name}}</td>
             <td>{{t.last_name}}</td>
             <td>{{t.dob}}</td>
