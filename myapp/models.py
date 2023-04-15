@@ -6,6 +6,10 @@ class Class(models.Model):
     class_id = models.CharField(max_length=10)
     class_name = models.CharField(max_length=20)
 
+class Subject(models.Model):
+    subject_id = models.CharField(max_length=10)
+    subject_name = models.CharField(max_length=20)
+
 class Teacher(models.Model):
     teacher_id = models.CharField(max_length=10,null=True,blank=True)
     first_name = models.CharField(max_length=30)
@@ -16,7 +20,7 @@ class Teacher(models.Model):
     address = models.CharField(max_length=50)
     salary = models.CharField(max_length=7)
     hire_date = models.DateField()
-    subject_id = models.CharField(max_length=10) # subject Name
+    subject = models.ForeignKey(Subject,on_delete=models.CASCADE,null=True,blank=True) # subject Nam
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE,null=True,blank=True)
     email = models.CharField(max_length=30)
     
@@ -42,10 +46,6 @@ class Student(models.Model):
     def __str__(self):
         return str(self.addmission_no)
 
-class Subject(models.Model):
-    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    subject_id = models.CharField(max_length=10)
-    subject_name = models.CharField(max_length=20)
 
 class Grade(models.Model):
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)

@@ -13,7 +13,7 @@
         <div class="form-container">
             <h1>Teacher Information</h1>
             <form action="" method="POST">
-              
+              {% csrf_token %}
               <div class="form-group">
                 <label htmlFor="firstName">First Name:</label>
                 <input type="text" id="firstName" name="first_name" required />

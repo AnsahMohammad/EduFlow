@@ -52,17 +52,10 @@ def teacher(request):
         address = request.POST.get('address')
         salary = request.POST.get('salary')
         hire_date = request.POST.get('hire_date')
-        
-        subject_id = request.POST.get('subject_id')
-        # Extracting Subject Info
-        sub_info = subject_id.split("-")
-
-        class_id = request.POST.get('class_id')
-        # Retrieve the Class instance
-        cls = Class.objects.get(pk=class_id)
-
         email = request.POST.get('email')
-
+        # subject_id = request.POST.get('subject_id')
+        # # Extracting Subject Info
+        # sub_info = subject_id.split("-")
         teacher = Teacher.objects.create(
             first_name = first_name,
             last_name=last_name,
@@ -72,19 +65,13 @@ def teacher(request):
             address=address,
             salary=salary,
             hire_date=hire_date,
-            subject_id=sub_info[0],
-            class_id=cls,
+            # subject_id=sub_info[0],
+            # class_id=cls,kjsjdflak
             email=email
         )
         teacher.save()
         teacher.teacher_id = teacher.pk
         teacher.save()
-        subject = Subject.objects.create(
-                teacher_id = teacher,
-                subject_id = sub_info[0],
-                subject_name = sub_info[1],
-            )
-        subject.save()
         return redirect('index')
 
     try:
