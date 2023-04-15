@@ -33,7 +33,6 @@ def addstudent(request):
 def parent(request):
     data = request.GET.get('data')
     data = json.loads(data)
-
     return HttpResponse("hello")
 
 
