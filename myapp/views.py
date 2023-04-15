@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 import json
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponseRedirect,HttpResponse,Http404
 from django.urls import reverse
+from .models import Class
 
 
 # Create your views here.
@@ -35,4 +36,10 @@ def parent(request):
     data = json.loads(data)
     return HttpResponse("hello")
 
-
+def teacher(request):
+    try:
+        classes = Class.objects.all()
+    except classes.DoesNotExist:
+        raise Http404('No class found to assign the teacher to')
+    context = {"classes" : classes}
+    return render(request,'teacherReg.html', context)

@@ -43,10 +43,10 @@ class Student(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE)
     parent_id = models.ForeignKey(Parent, on_delete=models.CASCADE)
 
-class Subject(models.Model):
-    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    subject_id = models.CharField(max_length=10)
-    subject_name = models.CharField(max_length=20)
+# class Subject(models.Model):
+#     teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+#     subject_id = models.CharField(max_length=10)
+#     subject_name = models.CharField(max_length=20)
 
 class Grade(models.Model):
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
