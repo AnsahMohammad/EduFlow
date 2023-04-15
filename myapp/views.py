@@ -123,3 +123,37 @@ def edit_student(request,pk):
         "students":student
     }
     return render(request,'edit_student.html',context)
+
+def edit_teacher(request,pk):
+    if request.method == "POST":
+        teacher_id = request.POST.get('id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        dob = request.POST.get('dob')
+        phone_no = request.POST.get('phone_no')
+        gender = request.POST.get('gender')
+        address = request.POST.get('address')
+        salary = request.POST.get('salary')
+        hire_date = request.POST.get('hire_data')
+        subject_id = request.POST.get('subject_id')
+        email = request.POST.get('email')
+        pk = request.POST.get('id')
+        teach = Teacher.objects.filter(id=pk)
+        for t in teach:
+            t.teacher_id = teacher_id
+            t.first_name = first_name
+            t.last_name = last_name
+            t.dob = dob
+            t.phone_no = phone_no
+            t.gender = gender
+            t.address = address
+            t.salary = salary
+            t.hire_date = hire_date
+            t.subject_id = subject_id
+            t.email = email
+            t.save()
+    teacher = Teacher.objects.filter(id=pk)
+    context = {
+        "teacher":teacher
+    }
+    return HttpResponse("template will get soon")

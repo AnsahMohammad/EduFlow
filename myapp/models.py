@@ -17,7 +17,7 @@ class Teacher(models.Model):
     salary = models.CharField(max_length=7)
     hire_date = models.DateField()
     subject_id = models.CharField(max_length=10) # subject Name
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE)
+    class_id = models.ForeignKey(Class, on_delete=models.CASCADE,null=True,blank=True)
     email = models.CharField(max_length=30)
     
 
