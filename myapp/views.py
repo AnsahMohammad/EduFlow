@@ -85,14 +85,14 @@ def teacher(request):
                 subject_name = sub_info[1],
             )
         subject.save()
-        return HttpResponse(request,"Teacher Database Saved")
+        return redirect('index')
 
     try:
         classes = Class.objects.all()
     except classes.DoesNotExist:
         raise Http404('No class found to assign the teacher to')
     context = {"classes" : classes}
-    return render(request,'teacherReg.html', context)
+    return render(request,'teacher.html', context)
 
 def show(request):
     students = Student.objects.all()
