@@ -39,7 +39,7 @@ def parent_add(request):
         for i in stud:
             i.parent_id=par
             i.save()
-        return HttpResponse("Data saved")
+        return redirect('index')
     return render(request,'parent.html',{"data":data})
 
 def teacher(request):
