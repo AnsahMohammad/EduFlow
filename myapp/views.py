@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 import json
 from django.http import HttpResponseRedirect,HttpResponse,Http404
 from django.urls import reverse
-from .models import Class, Teacher, Subject,Student,Parent
+from .models import Class, Teacher, Subject,Student,Parent,Fee
 
 
 # Create your views here.
@@ -39,7 +39,7 @@ def parent_add(request):
         for i in stud:
             i.parent_id=par
             i.save()
-        return HttpResponse("Data saved")
+        return redirect('index')
     return render(request,'parent.html',{"data":data})
 
 def teacher(request):
@@ -145,6 +145,32 @@ def edit_teacher(request,pk):
         "teacher":teacher
     }
     return render(request,'edit_teacher.html',context)
+
+def fees(request):
+    if request.GET.get('q')!=None:
+        q=request.GET.get('q')
+        stud = Student.objects.filter(addmission_no__icontains=q)
+    else:
+        stud = Student.objects.all()
+    context = {
+        'students':stud,
+    }
+    return render(request, 'fees.html',context)
+
+def fee_details(request,pk):
+    if request.method == 'POST':
+        fee_amount = request.POST.get('fee_amount')
+        fee_type = request.POST.get('fee_type')
+        student_id = request.POST.get('student_id')
+        stud = Student.objects.filter(id=student_id).first()
+        fee = Fee.objects.create(fee_amount=fee_amount,fee_type=fee_type,student_id=stud)
+        fee.save()
+        return HttpResponse("Fee Details saved")
+    stud = Student.objects.filter(id=pk)
+    context = {
+        'students':stud
+    }
+    return render(request,'fee_details.html',context)
 
 from django.urls import reverse
 
