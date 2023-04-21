@@ -7,8 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'studentform.css' %}">
     <title>Add Student</title>
+    <link rel="stylesheet" href="{% static 'navbar.css'%}">
 </head>
 <body>
+  <div>
+    <ul class="nav-bar">
+      <li><a class="active" href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    </div>
+    <br>
     <div class="form-container">
         <h1>Student Information</h1>
         <form action="student_add" method="POST">
