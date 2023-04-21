@@ -56,5 +56,5 @@ class Grade(models.Model):
 class Fee(models.Model):
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     fee_amount = models.CharField(max_length=10)
-    fee_type = models.CharField(max_length=10)
-    payment_date = models.DateField()
+    fee_type = models.CharField(max_length=100)
+    payment_date = models.DateField(auto_now_add=True,null=True)

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fees</title>
+    <style>
+        table{
+            border:1px solid black;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        td,th {
+           border:1px solid black; 
+           padding: 5px;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'index' %}">Go Back</a>
+    <br>
+    <form action="{% url 'fees' %}" method="GET">
+        {% csrf_token %}
+        <input type="text" name="q" placeholder="serach for student">
+        <input type="submit">
+    </form>
+    <p style="text-align: center;">
+    School DataBase Management
+    </p>
+    <br>
+    <h1>Students</h1>
+    <table>
+        <tr>
+            <th>Admission No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Admission Date</th>
+            <th>Class Details</th>
+            <th>Parents Id</th>
+            <th>Fee Details</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td style="text-align: center;">{{student.addmission_no}}</a></td>
+            <td style="text-align: center;">{{student.first_name}}</td>
+            <td style="text-align: center;">{{student.last_name}}</td>
+            <td style="text-align: center;">{{student.dob}}</td>
+            <td style="text-align: center;">{{student.gender}}</td>
+            <td style="text-align: center;">{{student.addmission_date}}</td>
+            {% if student.class_id %}
+            <td style="text-align: center;">{{student.class_id}}</td>
+            {% else %}
+            <td style="color:red;text-align: center;">NONE</td>
+            {% endif %}
+            <td style="text-align: center;">{{student.parent_id.id}}</td>
+            <td style="text-align: center;"><a href="{% url 'fee_details' student.id %}">Edit Fee</a></td>
+        </tr>
+        {% endfor %}
+    </table>    
+</body>
+</html>

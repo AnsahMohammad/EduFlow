@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Details</title>
+</head>
+<body>
+    {% for s in students %}
+    <p>{{s.first_name}}</p>
+    <form action="fee_details" method="POST">
+        {% csrf_token %}
+        <input type="text" name="fee_amount" placeholder="Amount">
+        <input type="text" name="fee_type" placeholder="Fee Type">
+        <input type="hidden" name="student_id" value="{{s.addmission_no}}">
+        <input type="submit">
+    </form>
+    {% endfor %}
+</body>
+</html>
