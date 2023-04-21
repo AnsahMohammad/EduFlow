@@ -145,3 +145,40 @@ def edit_teacher(request,pk):
         "teacher":teacher
     }
     return render(request,'edit_teacher.html',context)
+
+from django.urls import reverse
+
+def class_grades(request):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        context = {
+            'sub_id':id
+        }
+        return render(request,'student_grade.html',context)
+    chosen_class = request.GET.get('class')
+    class_obj = Class.objects.get(class_name=chosen_class)
+    teacher = Teacher.objects.filter(class_id=class_obj)
+    subs = []
+    for teach in teacher:
+        subs.extend(Subject.objects.filter(teacher=teach))
+
+    context = {
+        'class':chosen_class,
+        'subs': subs
+    }
+    return render(request, 'class_grades.html', context)
+
+def student_grade(request):
+    return render(request, 'student_grade.html')
+
+def show_grades(request):
+    if request.method == 'POST':
+        chosen_class = request.POST.get('classroom')
+        redirect_url = reverse('class_grades')+f'?class={chosen_class}'
+        return HttpResponseRedirect(redirect_url)
+
+    classes = Class.objects.all()
+    context = {
+        "classes": classes
+    }
+    return render(request, 'grades.html', context)

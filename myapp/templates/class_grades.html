@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Class Grades</title>
+</head>
+<body>
+    <h1>Classroom : {{class}}</h1>
+	{% if subs %}
+    <h2>Subjects</h2>
+    <ul>
+        {% for sub in subs %}        
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" nam="id" value="{{sub.subject_id}}">
+            <input type="submit" value="{{sub.subject_name}}">
+        </form>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>No subjects found.</p>
+    {% endif %}
+</body>
+</html>
