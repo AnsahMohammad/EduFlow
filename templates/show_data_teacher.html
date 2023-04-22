@@ -110,19 +110,8 @@
                   <li class="active"><a href="{% url 'show_teacher' %}">Teacher</a></li>
                   <li><a href="{% url 'fees' %}">Fee</a></li>
                   <li><a href="{% url 'grades' %}">Grade</a></li>
+                  <li><a href="{% url 'show_classes' %}">Classes</a></li>
                 </ul>
-                <!-- <ul class="nav navbar-nav navbar-right">
-                  <li>
-                    <form class="navbar-form" role="search">
-                      <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                      </div>
-                    </form>
-                  </li>
-                </ul> -->
               </div>
             </div>
           </nav>
@@ -132,7 +121,7 @@
             <div class="container2">
               <div class="row" style="float: right; padding-bottom: 15px;">
                 <div class="col-sm-4 col-md-4 offset-md-6" style="display: flex;width: 60%;">
-                  <form class="form-inline" method="GET" action="{% url 'show_student' %}">
+                  <form class="form-inline" method="GET" action="{% url 'show_teacher' %}">
                     <div class="input-group">
                       <input type="text" name="q" class="form-control" placeholder="Search ID" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
                       <div class="input-group-btn">
