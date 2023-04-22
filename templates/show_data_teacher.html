@@ -144,7 +144,7 @@
                   </form>
                 </div>
                 <div style="float: right;margin-right: 10%;">
-                  <a href="{% url 'add_student' %}" class="button">+ADD</a>
+                  <a href="{% url 'teacher_add' %}" class="button">+ADD</a>
                 </div>
               </div>
             </div>
@@ -186,8 +186,8 @@
                 {% endif %}
                 <td>{{t.email}}</td>
                 <td>{{t.address}}</td>
-                <td><button class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
-                  <button class="btn btn-primary"><i class="bi bi-eye"></i></button>
+                <td>
+                  <a href="{% url 'edit_teacher' t.id %}"><button class="btn btn-primary"><i class="bi bi-pencil-square"></i></button></a>
                 </td>
               </tr>
               {% endfor %}

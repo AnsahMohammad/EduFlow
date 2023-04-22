@@ -4,13 +4,14 @@
 	<title>Class Grades</title>
 </head>
 <body>
-    <h1>Classroom : {{class}}</h1>
+    <h1>Classroom : {{class.class_name}}</h1>
 	{% if subs %}
     <h2>Subjects</h2>
     <ul>
         {% for sub in subs %}        
         <form action="class_grades" method="POST">
             {% csrf_token %}
+            <input type="hidden" name="class_id" value="{{class.class_id}}">
             <input type="hidden" name="id" value="{{sub.subject_id}}">
             <input type="submit" value="{{sub.subject_name}} + {{sub.subject_id}}">
         </form>
@@ -19,8 +20,6 @@
     {% else %}
         <p>No subjects found.</p>
     {% endif %}
-
-
     
 </body>
 </html>

@@ -131,12 +131,14 @@
             </thead>
             <tbody>
               {% for s in students %}
+              {% if s.class_id == classes %}
               <tr>
                 <td>{{s.addmission_no}}</td>
                 <td>{{s.first_name}}</td>
                 <td>{{s.last_name}}</td>
                 <td><a href="{% url 'marks_enter' sub=subject.subject_id std=s.addmission_no %}">click</a></td>
               </tr>
+              {% endif %}
               {% endfor %}
             </tbody>
           </table>

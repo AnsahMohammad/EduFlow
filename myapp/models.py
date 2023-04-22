@@ -64,6 +64,7 @@ class Grade(models.Model):
     subject_id = models.ForeignKey(Subject, on_delete=models.CASCADE)
     score_no = models.CharField(max_length=10)
     exam_date = models.DateField()
+    exam_type = models.TextField(null=True,blank=True)
 
     def __str__(self):
         return str(self.student_id.addmission_no+"+"+self.subject_id.subject_name)

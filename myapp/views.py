@@ -220,7 +220,8 @@ from django.urls import reverse
 def class_grades(request):
     if request.method == 'POST':
         id = request.POST.get('id')
-        redirect_url = reverse('student_grade')+f'?id={id}'
+        class_id = request.POST.get('class_id')
+        redirect_url = reverse('student_grade')+f'?id={id}&class_id={class_id}'
         return HttpResponseRedirect(redirect_url)
     chosen_class = request.GET.get('class')
     class_obj = Class.objects.filter(id=chosen_class).first()
@@ -228,8 +229,9 @@ def class_grades(request):
     subs = []
     for teach in teacher:
         subs.extend(Subject.objects.filter(teacher=teach))
+    classes = Class.objects.filter(class_id=chosen_class).first()
     context = {
-        'class':chosen_class,
+        'class':classes,
         'subs': subs,
     }
     return render(request, 'class_grades.html', context)
@@ -241,10 +243,14 @@ def student_grade(request):
     else:
         students = Student.objects.all()
     sub_id = request.GET.get('id')
+    class_id = request.GET.get('class_id')
     sub = Subject.objects.filter(subject_id=sub_id).first()
+    classes = Class.objects.filter(class_id=class_id).first()
+    print
     context = {
         'subject':sub,
-        'students':students
+        'students':students,
+        'classes':classes
     }
     return render(request, 'student_grade.html',context)
 
