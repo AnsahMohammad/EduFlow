@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fruit Selection</title>
+</head>
+<body>
+	<div style="display: flex;justify-content: center; justify-content: center;height: 100vh;">
+		<form action="grades" method="POST">
+        {% csrf_token %}
+		<label for="classroom">Select a class:</label>
+		<select id="classroom" name="classroom">
+            {% for each in classes %}
+			    <option value={{each.id}}>{{each.class_name}}</option>
+            {% endfor %}
+		</select>
+		<br><br>
+		<input type="submit" value="Submit">
+	</form>
+	</div>
+</body>
+</html>

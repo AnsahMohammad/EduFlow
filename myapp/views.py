@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 import json
 from django.http import HttpResponseRedirect,HttpResponse,Http404
 from django.urls import reverse
-from .models import Class, Teacher, Subject,Student,Parent,Fee
+from .models import Class, Teacher, Subject,Student,Parent,Fee,Grade
 
 
 # Create your views here.
@@ -16,13 +16,19 @@ def add_student(request):
         last_name = request.POST.get('last_name')
         gender = request.POST.get('gender')
         dob = request.POST.get('dob')
-        stud = Student.objects.create(first_name=first_name,last_name=last_name,gender=gender,dob=dob)
+        class_id = request.POST.get('classroom')
+        class_code = Class.objects.filter(class_id=class_id).first()
+        stud = Student.objects.create(first_name=first_name,last_name=last_name,gender=gender,dob=dob,class_id=class_code)
         stud.save()
         stud.addmission_no = stud.id
         stud.save()
         redirect_url = reverse('parent_add')+f'?data={stud.id}'
         return HttpResponseRedirect(redirect_url)
-    return render(request,'student.html')
+    classes = Class.objects.all()
+    context={
+        'classes':classes
+    }
+    return render(request,'student.html',context)
 
 def parent_add(request):
     data = request.GET.get('data')
@@ -81,14 +87,27 @@ def teacher(request):
     context = {"classes" : classes}
     return render(request,'teacher.html', context)
 
-def show(request):
-    students = Student.objects.all()
-    teachers = Teacher.objects.all()
+def show_student(request):
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
+        q = request.GET.get('q')
+        students = Student.objects.filter(addmission_no=q)
+    else:
+        students = Student.objects.all()
     context = {
         "students":students,
-        "teachers":teachers
     }
-    return render(request,'show_data.html',context)
+    return render(request,'show_data_student.html',context)
+
+def show_teacher(request):
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
+        q = request.GET.get('q')
+        teachers = Teacher.objects.filter(id=q)
+    else:
+        teachers = Teacher.objects.all()
+    context = {
+        "teachers":teachers,
+    }
+    return render(request,"show_data_teacher.html",context)
 
 def edit_student(request,pk):
     if request.method == "POST":
@@ -97,12 +116,15 @@ def edit_student(request,pk):
         gender = request.POST.get('gender')
         dob = request.POST.get('dob')
         pk = request.POST.get('id')
+        classroom = request.POST.get('classroom')
+        stud_id = Class.objects.filter(class_id=classroom).first()
         stud = Student.objects.filter(id=pk)
         for s in stud:
             s.first_name = first_name
             s.last_name = last_name
             s.gender = gender
             s.dob = dob
+            s.class_id=stud_class
             s.save()
         return redirect('show')
     student = Student.objects.filter(id=pk)
@@ -147,7 +169,7 @@ def edit_teacher(request,pk):
     return render(request,'edit_teacher.html',context)
 
 def fees(request):
-    if request.GET.get('q')!=None:
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
         q=request.GET.get('q')
         stud = Student.objects.filter(addmission_no__icontains=q)
     else:
@@ -171,3 +193,69 @@ def fee_details(request,pk):
         'students':stud
     }
     return render(request,'fee_details.html',context)
+
+def marks_enter(request,sub,std):
+    subject = Subject.objects.filter(subject_id=sub).first()
+    student = Student.objects.filter(addmission_no=std).first()
+    if request.method == "POST":
+        date = request.POST.get('date')
+        sub = request.POST.get('sub')
+        subject = Subject.objects.filter(subject_id=sub).first()
+        stud = request.POST.get('stud')
+        student = Student.objects.filter(addmission_no=stud).first()
+        marks = request.POST.get('marks')
+        grade = Grade.objects.create(score_no=marks,exam_date=date,student_id=student,subject_id=subject)
+        grade.save()
+        url = reverse('student_grade') + f'?id={subject.subject_id}'
+        return redirect(url)
+    context = {
+        'subject':subject,
+        'student':student
+    }
+    return render(request,'enter_marks.html',context)
+
+
+from django.urls import reverse
+
+def class_grades(request):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        redirect_url = reverse('student_grade')+f'?id={id}'
+        return HttpResponseRedirect(redirect_url)
+    chosen_class = request.GET.get('class')
+    class_obj = Class.objects.filter(id=chosen_class).first()
+    teacher = Teacher.objects.filter(class_id=class_obj)
+    subs = []
+    for teach in teacher:
+        subs.extend(Subject.objects.filter(teacher=teach))
+    context = {
+        'class':chosen_class,
+        'subs': subs
+    }
+    return render(request, 'class_grades.html', context)
+
+def student_grade(request):
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
+        q=request.GET.get('q')
+        students = Student.objects.filter(addmission_no__icontains=q)
+    else:
+        students = Student.objects.all()
+    sub_id = request.GET.get('id')
+    sub = Subject.objects.filter(subject_id=sub_id).first()
+    context = {
+        'subject':sub,
+        'students':students
+    }
+    return render(request, 'student_grade.html',context)
+
+def show_grades(request):
+    if request.method == 'POST':
+        chosen_class = request.POST.get('classroom')
+        redirect_url = reverse('class_grades')+f'?class={chosen_class}'
+        return HttpResponseRedirect(redirect_url)
+
+    classes = Class.objects.all()
+    context = {
+        "classes": classes
+    }
+    return render(request, 'grades.html', context)

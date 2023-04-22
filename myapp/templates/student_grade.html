@@ -90,36 +90,25 @@
               </div>
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Student</a></li>
-                  <li><a href="#">Teacher</a></li>
-                  <li><a href="#">Fee</a></li>
-                  <li><a href="#">Grade</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                    <form class="navbar-form" role="search">
-                      <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                      </div>
-                    </form>
-                  </li>
+                  <li><a href="{% url 'index' %}">Home</a></li>
+                  <li><a href="{% url 'show_student' %}">Student</a></li>
+                  <li><a href="{% url 'show_teacher' %}">Teacher</a></li>
+                  <li><a href="{% url 'fees' %}">Fee</a></li>
+                  <li  class="active"><a href="{% url 'grades' %}">Grade</a></li>
                 </ul>
               </div>
             </div>
           </nav>
           
         <div class="container1">
-            <h1>Student Table</h1>
+            <h1>Edit Marks for {{subject.subject_name}} </h1>
             <div class="container2">
               <div class="row">
-                <div class="col-sm-4 col-md-4 offset-md-6">
-                  <form class="form-inline">
+                <div class="col-sm-4 col-md-4 offset-md-6" style="display: flex;">
+                  <form class="form-inline" method="GET" action="{% url 'student_grade' %}">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
+                      <input type="hidden" name="id" value="{{subject.subject_id}}">
+                      <input type="text" name="q" class="form-control" placeholder="Search ID" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
                       <div class="input-group-btn">
                         <button class="btn btn-primary" type="submit" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
                           <i class="fa fa-search"></i>
@@ -137,44 +126,18 @@
                 <th>Admission No.</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Date of Birth</th>
-                <th>Gender</th>
-                <th>Admission Date</th>
-                <th>Class Details</th>
-                <th>Parents ID</th>
+                <th>Add Marks</th>
               </tr>
             </thead>
             <tbody>
+              {% for s in students %}
               <tr>
-                <td>1234</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>01/01/2000</td>
-                <td>Male</td>
-                <td>09/01/2021</td>
-                <td>Class 10A</td>
-                <td>5678</td>
+                <td>{{s.addmission_no}}</td>
+                <td>{{s.first_name}}</td>
+                <td>{{s.last_name}}</td>
+                <td><a href="{% url 'marks_enter' sub=subject.subject_id std=s.addmission_no %}">click</a></td>
               </tr>
-              <tr>
-                <td>5678</td>
-                <td>Jane</td>
-                <td>Doe</td>
-                <td>02/14/2005</td>
-                <td>Female</td>
-                <td>09/01/2021</td>
-                <td>Class 8B</td>
-                <td>1234</td>
-              </tr>
-              <tr>
-                <td>9012</td>
-                <td>Bob</td>
-                <td>Smith</td>
-                <td>12/31/1998</td>
-                <td>Male</td>
-                <td>09/01/2021</td>
-                <td>Class 12C</td>
-                <td>3456</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
