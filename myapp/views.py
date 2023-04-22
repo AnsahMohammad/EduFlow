@@ -81,14 +81,27 @@ def teacher(request):
     context = {"classes" : classes}
     return render(request,'teacher.html', context)
 
-def show(request):
-    students = Student.objects.all()
-    teachers = Teacher.objects.all()
+def show_student(request):
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
+        q = request.GET.get('q')
+        students = Student.objects.filter(addmission_no=q)
+    else:
+        students = Student.objects.all()
     context = {
         "students":students,
-        "teachers":teachers
     }
-    return render(request,'show_data.html',context)
+    return render(request,'show_data_student.html',context)
+
+def show_teacher(request):
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
+        q = request.GET.get('q')
+        teachers = Teacher.objects.filter(id=q)
+    else:
+        teachers = Teacher.objects.all()
+    context = {
+        "teachers":teachers,
+    }
+    return render(request,"show_data_teacher.html",context)
 
 def edit_student(request,pk):
     if request.method == "POST":
@@ -147,7 +160,7 @@ def edit_teacher(request,pk):
     return render(request,'edit_teacher.html',context)
 
 def fees(request):
-    if request.GET.get('q')!=None:
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
         q=request.GET.get('q')
         stud = Student.objects.filter(addmission_no__icontains=q)
     else:
@@ -171,3 +184,40 @@ def fee_details(request,pk):
         'students':stud
     }
     return render(request,'fee_details.html',context)
+
+from django.urls import reverse
+
+def class_grades(request):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        context = {
+            'sub_id':id
+        }
+        return render(request,'student_grade.html',context)
+    chosen_class = request.GET.get('class')
+    class_obj = Class.objects.get(class_name=chosen_class)
+    teacher = Teacher.objects.filter(class_id=class_obj)
+    subs = []
+    for teach in teacher:
+        subs.extend(Subject.objects.filter(teacher=teach))
+
+    context = {
+        'class':chosen_class,
+        'subs': subs
+    }
+    return render(request, 'class_grades.html', context)
+
+def student_grade(request):
+    return render(request, 'student_grade.html')
+
+def show_grades(request):
+    if request.method == 'POST':
+        chosen_class = request.POST.get('classroom')
+        redirect_url = reverse('class_grades')+f'?class={chosen_class}'
+        return HttpResponseRedirect(redirect_url)
+
+    classes = Class.objects.all()
+    context = {
+        "classes": classes
+    }
+    return render(request, 'grades.html', context)
