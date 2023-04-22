@@ -36,6 +36,14 @@
             <input type="text" class="motherTongue" name="gender" required />
           </div>
           <div class="form-group">
+            <label for="classroom">Select a class:</label>
+            <select id="classroom" name="classroom">
+              {% for each in classes %}
+                <option value={{each.id}}>{{each.class_name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
             <label htmlFor="dob">Date of Birth:</label>
             <input type="date" id="dob" name="dob" onChange={handleInputChange} />
           </div>

@@ -16,13 +16,19 @@ def add_student(request):
         last_name = request.POST.get('last_name')
         gender = request.POST.get('gender')
         dob = request.POST.get('dob')
-        stud = Student.objects.create(first_name=first_name,last_name=last_name,gender=gender,dob=dob)
+        class_id = request.POST.get('classroom')
+        class_code = Class.objects.filter(class_id=class_id).first()
+        stud = Student.objects.create(first_name=first_name,last_name=last_name,gender=gender,dob=dob,class_id=class_code)
         stud.save()
         stud.addmission_no = stud.id
         stud.save()
         redirect_url = reverse('parent_add')+f'?data={stud.id}'
         return HttpResponseRedirect(redirect_url)
-    return render(request,'student.html')
+    classes = Class.objects.all()
+    context={
+        'classes':classes
+    }
+    return render(request,'student.html',context)
 
 def parent_add(request):
     data = request.GET.get('data')
@@ -110,12 +116,15 @@ def edit_student(request,pk):
         gender = request.POST.get('gender')
         dob = request.POST.get('dob')
         pk = request.POST.get('id')
+        classroom = request.POST.get('classroom')
+        stud_id = Class.objects.filter(class_id=classroom).first()
         stud = Student.objects.filter(id=pk)
         for s in stud:
             s.first_name = first_name
             s.last_name = last_name
             s.gender = gender
             s.dob = dob
+            s.class_id=stud_class
             s.save()
         return redirect('show')
     student = Student.objects.filter(id=pk)
