@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student Information Dashboard</title>
+	<style>
+body {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			background-color: #f9f9f9;
+		}
+
+		.container {
+			max-width: 1140px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+
+		.col-md-6 {
+			border: 2px solid #87CEFA;
+			background-color: #F0FFFF;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+
+		h3 {
+			margin-top: 20px;
+			margin-bottom: 10px;
+			font-size: 24px;
+		}
+
+		strong {
+			font-weight: bold;
+		}
+
+		table {
+			border-collapse: collapse;
+			margin-top: 20px;
+			width: 100%;
+		}
+
+		th {
+			background-color: #f2f2f2;
+			text-align: center;
+			padding: 10px;
+		}
+
+		td {
+			text-align: center;
+			padding: 10px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		td:contains(A) {
+			color: green;
+			font-weight: bold;
+		}
+
+		td:contains(B) {
+			color: orange;
+			font-weight: bold;
+		}
+
+		td:contains(C) {
+			color: red;
+			font-weight: bold;
+		}
+		.grades{
+        border: 2px solid #87CEFA;
+			background-color: #F0FFFF;
+			padding: 20px;
+			margin-bottom: 20px;
+        }
+        .fee-details{
+        border: 2px solid #87CEFA;
+			background-color: #F0FFFF;
+			padding: 20px;
+			margin-bottom: 20px;
+        }
+	</style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile">
+      <h2>Student Profile Details</h2>
+      <hr>
+      <div class="profile-details">
+        <div class="row">
+          <div class="col-md-6">
+          <h1>Student Details</h1>
+            <p><strong>Admission Number:</strong> 12345</p>
+            <p><strong>First Name:</strong> John</p>
+            <p><strong>Last Name:</strong> Doe</p>
+            <p><strong>Gender:</strong> Male</p>
+            <p><strong>Class:</strong> 10th Standard</p>
+            <p><strong>Date of Birth:</strong> 01/01/2006</p>
+          </div>
+          <div class="col-md-6">
+          	<h1>Parents Details</h1>
+            <p><strong>Father's Name:</strong> Mark Doe</p>
+            <p><strong>Father's Phone Number:</strong> 9876543210</p>
+            <p><strong>Mother's Name:</strong> Lisa Doe</p>
+            <p><strong>Mother's Phone Number:</strong> 9876543210</p>
+            <p><strong>Address:</strong> 123 Main St, Anytown, USA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grades">
+      <h2>Grades and Fee Details</h2>
+      <hr>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Test 1</th>
+            <th>Test 2</th>
+            <th>Final Exam</th>
+            <th>Total</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mathematics</td>
+            <td>80</td>
+            <td>85</td>
+            <td>90</td>
+            <td>255</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td>Science</td>
+            <td>75</td>
+            <td>80</td>
+            <td>85</td>
+            <td>240</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>English</td>
+            <td>85</td>
+            <td>90</td>
+            <td>95</td>
+            <td>270</td>
+            <td>A</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="fee-details">
+        <p><strong>Total Fees:</strong> $1000</p>
+        <p><strong>Paid Fees:</strong> $500</p>
+        <p><strong>Balance:</strong> $500</p>
+      </div>
+  </div>
+</body>
+
+
+</html>
