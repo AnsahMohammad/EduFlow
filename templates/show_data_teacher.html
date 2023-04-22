@@ -90,11 +90,11 @@
               </div>
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Student</a></li>
-                  <li><a href="#">Teacher</a></li>
-                  <li><a href="#">Fee</a></li>
-                  <li><a href="#">Grade</a></li>
+                  <li><a href="{% url 'index' %}">Home</a></li>
+                  <li><a href="{% url 'show_student' %}">Student</a></li>
+                  <li class="active"><a href="{% url 'show_teacher' %}">Teacher</a></li>
+                  <li><a href="{% url 'fees' %}">Fee</a></li>
+                  <li><a href="{% url 'grades' %}">Grade</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   <li>
@@ -113,13 +113,13 @@
           </nav>
           
         <div class="container1">
-            <h1>Student Table</h1>
+            <h1>Teacher Table</h1>
             <div class="container2">
               <div class="row">
                 <div class="col-sm-4 col-md-4 offset-md-6">
-                  <form class="form-inline">
+                  <form class="form-inline" method="GET" action="{% url 'show_teacher' %}">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
+                      <input type="text" class="form-control" name="q" placeholder="Search ID" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
                       <div class="input-group-btn">
                         <button class="btn btn-primary" type="submit" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
                           <i class="fa fa-search"></i>
@@ -134,47 +134,41 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Admission No.</th>
+                <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Date of Birth</th>
+                <th>Phone Number</th>
                 <th>Gender</th>
-                <th>Admission Date</th>
-                <th>Class Details</th>
-                <th>Parents ID</th>
+                <th>Salary</th>
+                <th>Hire Date</th>
+                <th>Subject</th>
+                <th>Class</th>
+                <th>Email</th>
+                <th>Address</th>
               </tr>
             </thead>
             <tbody>
+              {% for t in teachers %}
               <tr>
-                <td>1234</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>01/01/2000</td>
-                <td>Male</td>
-                <td>09/01/2021</td>
-                <td>Class 10A</td>
-                <td>5678</td>
+                <td>{{t.id}}</td>
+                <td>{{t.first_name}}</td>
+                <td>{{t.last_name}}</td>
+                <td>{{t.dob}}</td>
+                <td>{{t.phone_no}}</td>
+                <td>{{t.gender}}</td>
+                <td>{{t.salary}}</td>
+                <td>{{t.hire_date}}</td>
+                <td>{{t.subject_id}}</td>
+                {% if t.class_id %}
+                <td>{{t.class_id.class_name}}</td>
+                {% else %}
+                <td style="color:red;">NONE</td>
+                {% endif %}
+                <td>{{t.email}}</td>
+                <td>{{t.address}}</td>
               </tr>
-              <tr>
-                <td>5678</td>
-                <td>Jane</td>
-                <td>Doe</td>
-                <td>02/14/2005</td>
-                <td>Female</td>
-                <td>09/01/2021</td>
-                <td>Class 8B</td>
-                <td>1234</td>
-              </tr>
-              <tr>
-                <td>9012</td>
-                <td>Bob</td>
-                <td>Smith</td>
-                <td>12/31/1998</td>
-                <td>Male</td>
-                <td>09/01/2021</td>
-                <td>Class 12C</td>
-                <td>3456</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>

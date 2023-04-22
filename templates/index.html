@@ -76,11 +76,11 @@ color: #fff;
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Student</a></li>
-        <li><a href="#">Teacher</a></li>
-        <li><a href="#">Fee</a></li>
-        <li><a href="#">Grade</a></li>
+        <li class="active"><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'show_student' %}">Student</a></li>
+        <li><a href="{% url 'show_teacher' %}">Teacher</a></li>
+        <li><a href="{% url 'fees' %}">Fee</a></li>
+        <li><a href="{% url 'grades' %}">Grade</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -96,11 +96,11 @@ color: #fff;
     	
       <img src="https://cdn-icons-png.flaticon.com/512/663/663045.png?w=740&t=st=1682097368~exp=1682097968~hmac=28ba8913c39dc359bdf1097b6bce8b6164589dc91a9df6b660c977b1400008ef" alt="Image">
       <br>
-      <a class="button"  href="{% url 'show' %}">Student</a>    
+      <a class="button"  href="{% url 'show_student' %}">Student</a>    
     </div>
     <div class="col-sm-4">
       <img src="https://cdn-icons-png.flaticon.com/512/46/46652.png?w=740&t=st=1682095997~exp=1682096597~hmac=d4ca011605bf684e1a76599d686cd183770fd9ff12913f5435ed7c236c6c0df5"  alt="Image">
-    	<a class="button" href="{% url 'show' %}">Teacher</a>    
+    	<a class="button" href="{% url 'show_teacher' %}">Teacher</a>    
     </div>
     </div>
     <br>

@@ -81,14 +81,27 @@ def teacher(request):
     context = {"classes" : classes}
     return render(request,'teacher.html', context)
 
-def show(request):
-    students = Student.objects.all()
-    teachers = Teacher.objects.all()
+def show_student(request):
+    if request.GET.get('q')!=None:
+        q = request.GET.get('q')
+        students = Student.objects.filter(addmission_no=q)
+    else:
+        students = Student.objects.all()
     context = {
         "students":students,
-        "teachers":teachers
     }
-    return render(request,'show_data.html',context)
+    return render(request,'show_data_student.html',context)
+
+def show_teacher(request):
+    if request.GET.get('q')!=None:
+        q = request.GET.get('q')
+        teachers = Teacher.objects.filter(id=q)
+    else:
+        teachers = Teacher.objects.all()
+    context = {
+        "teachers":teachers,
+    }
+    return render(request,"show_data_teacher.html",context)
 
 def edit_student(request,pk):
     if request.method == "POST":

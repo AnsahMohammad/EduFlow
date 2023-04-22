@@ -25,7 +25,6 @@
     <a href="{% url 'index' %}">Go Back</a>
     <br>
     <form action="{% url 'fees' %}" method="GET">
-        {% csrf_token %}
         <input type="text" name="q" placeholder="serach for student">
         <input type="submit">
     </form>
