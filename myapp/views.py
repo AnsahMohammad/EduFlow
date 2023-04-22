@@ -82,7 +82,7 @@ def teacher(request):
     return render(request,'teacher.html', context)
 
 def show_student(request):
-    if request.GET.get('q')!=None:
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
         q = request.GET.get('q')
         students = Student.objects.filter(addmission_no=q)
     else:
@@ -93,7 +93,7 @@ def show_student(request):
     return render(request,'show_data_student.html',context)
 
 def show_teacher(request):
-    if request.GET.get('q')!=None:
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
         q = request.GET.get('q')
         teachers = Teacher.objects.filter(id=q)
     else:
@@ -160,7 +160,7 @@ def edit_teacher(request,pk):
     return render(request,'edit_teacher.html',context)
 
 def fees(request):
-    if request.GET.get('q')!=None:
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
         q=request.GET.get('q')
         stud = Student.objects.filter(addmission_no__icontains=q)
     else:
