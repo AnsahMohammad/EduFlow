@@ -230,7 +230,7 @@ def class_grades(request):
         subs.extend(Subject.objects.filter(teacher=teach))
     context = {
         'class':chosen_class,
-        'subs': subs
+        'subs': subs,
     }
     return render(request, 'class_grades.html', context)
 
