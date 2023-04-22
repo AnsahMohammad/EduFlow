@@ -5,12 +5,12 @@
 </head>
 <body>
 	<div style="display: flex;justify-content: center; justify-content: center;height: 100vh;">
-		<form action="show_grades" method="POST">
+		<form action="grades" method="POST">
         {% csrf_token %}
 		<label for="classroom">Select a class:</label>
 		<select id="classroom" name="classroom">
             {% for each in classes %}
-			    <option value={{each.class_name}}>{{each.class_name}}</option>
+			    <option value={{each.id}}>{{each.class_name}}</option>
             {% endfor %}
 		</select>
 		<br><br>

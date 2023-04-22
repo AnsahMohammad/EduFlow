@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{subject.subject_name}} Marks</title>
+</head>
+<body>
+    Enter Marks For {{subject.subject_name}} of {{student.first_name}}
+    <form action="marks_enter" method="POST">
+        {% csrf_token %}
+        <input type="text" name="marks">
+        <br>
+        <input type="hidden" name="sub" value="{{subject.subject_id}}">
+        <input type="hidden" name="stud" value="{{student.addmission_no}}">
+        <input type="date" name="date">
+        <input type="submit">
+    </form>
+</body>
+</html>

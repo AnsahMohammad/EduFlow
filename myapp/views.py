@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 import json
 from django.http import HttpResponseRedirect,HttpResponse,Http404
 from django.urls import reverse
-from .models import Class, Teacher, Subject,Student,Parent,Fee
+from .models import Class, Teacher, Subject,Student,Parent,Fee,Grade
 
 
 # Create your views here.
@@ -185,22 +185,40 @@ def fee_details(request,pk):
     }
     return render(request,'fee_details.html',context)
 
+def marks_enter(request,sub,std):
+    subject = Subject.objects.filter(subject_id=sub).first()
+    student = Student.objects.filter(addmission_no=std).first()
+    if request.method == "POST":
+        date = request.POST.get('date')
+        sub = request.POST.get('sub')
+        subject = Subject.objects.filter(subject_id=sub).first()
+        stud = request.POST.get('stud')
+        student = Student.objects.filter(addmission_no=stud).first()
+        marks = request.POST.get('marks')
+        grade = Grade.objects.create(score_no=marks,exam_date=date,student_id=student,subject_id=subject)
+        grade.save()
+        url = reverse('student_grade') + f'?id={subject.subject_id}'
+        return redirect(url)
+    context = {
+        'subject':subject,
+        'student':student
+    }
+    return render(request,'enter_marks.html',context)
+
+
 from django.urls import reverse
 
 def class_grades(request):
     if request.method == 'POST':
         id = request.POST.get('id')
-        context = {
-            'sub_id':id
-        }
-        return render(request,'student_grade.html',context)
+        redirect_url = reverse('student_grade')+f'?id={id}'
+        return HttpResponseRedirect(redirect_url)
     chosen_class = request.GET.get('class')
-    class_obj = Class.objects.get(class_name=chosen_class)
+    class_obj = Class.objects.filter(id=chosen_class).first()
     teacher = Teacher.objects.filter(class_id=class_obj)
     subs = []
     for teach in teacher:
         subs.extend(Subject.objects.filter(teacher=teach))
-
     context = {
         'class':chosen_class,
         'subs': subs
@@ -208,7 +226,18 @@ def class_grades(request):
     return render(request, 'class_grades.html', context)
 
 def student_grade(request):
-    return render(request, 'student_grade.html')
+    if request.GET.get('q')!=None and request.GET.get('q')!='':
+        q=request.GET.get('q')
+        students = Student.objects.filter(addmission_no__icontains=q)
+    else:
+        students = Student.objects.all()
+    sub_id = request.GET.get('id')
+    sub = Subject.objects.filter(subject_id=sub_id).first()
+    context = {
+        'subject':sub,
+        'students':students
+    }
+    return render(request, 'student_grade.html',context)
 
 def show_grades(request):
     if request.method == 'POST':
