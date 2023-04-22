@@ -188,7 +188,7 @@ def fee_details(request,pk):
         stud = Student.objects.filter(id=student_id).first()
         fee = Fee.objects.create(fee_amount=fee_amount,fee_type=fee_type,student_id=stud)
         fee.save()
-        return HttpResponse("Fee Details saved")
+        return redirect('fees')
     stud = Student.objects.filter(id=pk)
     context = {
         'students':stud
