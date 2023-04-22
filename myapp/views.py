@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 import json
 from django.http import HttpResponseRedirect,HttpResponse,Http404
 from django.urls import reverse
+from django.contrib import messages
 from .models import Class, Teacher, Subject,Student,Parent,Fee,Grade
 
 
@@ -78,7 +79,7 @@ def teacher(request):
         teacher.save()
         teacher.teacher_id = teacher.pk
         teacher.save()
-        return redirect('index')
+        return redirect('show_student')
 
     try:
         classes = Class.objects.all()
@@ -204,7 +205,8 @@ def marks_enter(request,sub,std):
         stud = request.POST.get('stud')
         student = Student.objects.filter(addmission_no=stud).first()
         marks = request.POST.get('marks')
-        grade = Grade.objects.create(score_no=marks,exam_date=date,student_id=student,subject_id=subject)
+        exam_type = request.POST.get('exam_type')
+        grade = Grade.objects.create(score_no=marks,exam_date=date,student_id=student,subject_id=subject,exam_type=exam_type)
         grade.save()
         url = reverse('student_grade') + f'?id={subject.subject_id}'
         return redirect(url)
@@ -285,4 +287,13 @@ def show_classes(request):
     return render(request,'classes.html',context)
 
 def add_class(request):
+    if request.method == 'POST':
+        class_id = request.POST.get('class_id')
+        class_name = request.POST.get('class_name')
+        if Class.objects.filter(class_id=class_id).exists():
+            messages.error(request,"Id already exists!")
+            return redirect('add_class')
+        new_class = Class.objects.create(class_id=class_id,class_name=class_name)
+        new_class.save()
+        return redirect('show_classes')
     return render(request,'add_class.html')
