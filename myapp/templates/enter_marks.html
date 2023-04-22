@@ -120,11 +120,11 @@
         </div>
         <form action="marks_enter" method="POST">
             {% csrf_token %}
-            <input type="text" name="marks">
+            <input type="text" name="marks" placeholder="Score">
             <br>
             <input type="hidden" name="sub" value="{{subject.subject_id}}">
             <input type="hidden" name="stud" value="{{student.addmission_no}}">
-            <input type="text" name="exam_type">
+            <input type="text" name="exam_type" placeholder="Exam Type">
             <br>
             <input type="date" name="date">
             <input type="submit">
