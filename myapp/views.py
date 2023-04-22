@@ -265,3 +265,24 @@ def show_grades(request):
         "classes": classes
     }
     return render(request, 'grades.html', context)
+
+def view_student(request,pk):
+    student = Student.objects.filter(addmission_no=pk).first()
+    grades = Grade.objects.filter(student_id=pk)
+    fees = Fee.objects.filter(student_id=pk)
+    context={
+        'student':student,
+        'grades':grades,
+        'fees':fees
+    }
+    return render(request,'view_student.html',context)
+
+def show_classes(request):
+    classes = Class.objects.all()
+    context = {
+        'classes':classes
+    }
+    return render(request,'classes.html',context)
+
+def add_class(request):
+    return render(request,'add_class.html')

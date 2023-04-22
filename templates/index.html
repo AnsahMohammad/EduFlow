@@ -12,7 +12,7 @@
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     body {
   background: linear-gradient(45deg,#ddd, #333 );
-  height: 100vh;
+  height: 100%;
 }
 
     .navbar {
@@ -20,23 +20,12 @@
       border-radius: 0;
     }
     .container {
-  padding-left:20%;
+  padding:10%;
   padding-top: 3%;
     }
     .container .row{
       width: auto;
     }
-    /* Add a gray background color and some padding to the footer */
-    footer {
-   /* position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%; */
-   background-color: black;
-   color: white;
-   text-align: center;
-   padding: 20px;
-}
 .col-sm-4 img{
   width: 225px;
   height:225px;
@@ -94,7 +83,6 @@ color: #fff;
 <br>
   <div class="row">
     <div class="col-sm-4">
-    	
       <img src="https://cdn-icons-png.flaticon.com/512/663/663045.png?w=740&t=st=1682097368~exp=1682097968~hmac=28ba8913c39dc359bdf1097b6bce8b6164589dc91a9df6b660c977b1400008ef" alt="Image">
       <br>
       <a class="button"  href="{% url 'show_student' %}">Student</a>    
@@ -103,14 +91,18 @@ color: #fff;
       <img src="https://cdn-icons-png.flaticon.com/512/46/46652.png?w=740&t=st=1682095997~exp=1682096597~hmac=d4ca011605bf684e1a76599d686cd183770fd9ff12913f5435ed7c236c6c0df5"  alt="Image">
     	<a class="button" href="{% url 'show_teacher' %}">Teacher</a>    
     </div>
+    <div class="col-sm-4">
+      <img src="https://cdn-icons-png.flaticon.com/512/991/991922.png?w=740&t=st=1682161203~exp=1682161803~hmac=be3dfd7eebdfc3a33bfeaa8263e3689faec70d5f0c9b23c6a63224f9062fc83b"  alt="Image">
+    	<a class="button" href="{% url 'show_classes' %}">Classes</a>    
+    </div>
     </div>
     <br>
-  <div class="row">
+  <div class="row" style="padding-left: 20%;">
     <div class="col-sm-4">
       <img src="https://cdn-icons-png.flaticon.com/512/126/126057.png?w=740&t=st=1682096559~exp=1682097159~hmac=fd0ad51791cc8049e941d6ddf73a15b1c4e98c097babf4324c6ffeec9cf74023"  alt="Image">
     	<a href="{% url 'fees' %}" class="button">Fee</a>    
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4" style="margin-left:10%;">
       <img src="https://cdn-icons-png.flaticon.com/512/1018/1018743.png?w=740&t=st=1682097456~exp=1682098056~hmac=7b3cff5f4b5782d4df74ae1d4e203ea1f6e5488af63c20b2444e1982cf3e8dbf"  alt="Image">
     	<a href="{% url 'grades' %}" class="button">Grade</a>    
     </div>

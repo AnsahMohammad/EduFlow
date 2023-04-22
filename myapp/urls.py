@@ -15,5 +15,8 @@ urlpatterns = [
     path('grades',views.show_grades,name='grades'),
     path('class_grades',views.class_grades,name='class_grades'),
     path('student_grade',views.student_grade,name='student_grade'),
-    path('marks_enter/<str:sub>/<str:std>',views.marks_enter,name='marks_enter')
+    path('marks_enter/<str:sub>/<str:std>',views.marks_enter,name='marks_enter'),
+    path('view_student/<str:pk>',views.view_student,name='view_student'),
+    path('show_classes',views.show_classes,name='show_classes'),
+    path('add_class',views.add_class,name='add_class')
 ]
