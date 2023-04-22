@@ -1,21 +1,100 @@
-<!DOCTYPE html>
 <html>
 <head>
-	<title>Fruit Selection</title>
+<title>Praveen</title>
+<link rel="icon" href="C:\Users\DELL\Desktop\New folder (7)\nivas11.jpg" type="img/X-icon">
 </head>
-<body>
-	<div style="display: flex;justify-content: center; justify-content: center;height: 100vh;">
-		<form action="grades" method="POST">
-        {% csrf_token %}
-		<label for="classroom">Select a class:</label>
-		<select id="classroom" name="classroom">
-            {% for each in classes %}
-			    <option value={{each.id}}>{{each.class_name}}</option>
-            {% endfor %}
-		</select>
-		<br><br>
-		<input type="submit" value="Submit">
-	</form>
-	</div>
-</body>
+<style>
+  * {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  } 
+  body {
+    font-family:Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+  }
+  .container {
+    max-width: 50rem;
+    margin: 2rem auto;
+    border: 3px solid;
+	padding: 10px;
+	width: 30%;
+	border-radius: 20px;
+	border-color: #007bff;
+    box-shadow: rgba(24, 24, 26, 0.3);
+  }
+  .form-class {
+    margin: 2rem 0px;
+  }
+  
+  .form-control {
+    display: flex;
+    flex-direction: column;
+  }
+  .input-div {
+    margin-bottom: 1rem;
+  }
+  
+  .field-inputs {
+    display: flex;
+	justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .form-control-input {
+	margin-top:10px;
+    font-size: 20px;
+    padding: 0.4rem 0px;
+    text-indent: 0.5rem;
+    border: none;
+    outline: 1px solid #999;
+    border-radius: 7px;
+    width: 100%;
+    color: #999;
+  }
+  .form-control-input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #007bff;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+  }
+  button {
+    font-size: 20px;
+    margin: 0px auto;
+    display: block;
+    color: wite;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid white;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 1px #0000;
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+  }
+  </style>
+  <br>
+  <br><br><br><br><br><br><br>
+<div class="container">
+<!-- form start -->
+  <form class="form-class" action="grades" method="POST">
+	{% csrf_token %}
+    <div class="field-inputs">
+      <div class="input-div">
+      <div class="input-div">
+        <h3>Select a Class
+        <select class="form-control-input" name="classroom" required></h3>
+			{% for each in classes %}
+			<option value={{each.id}}>{{each.class_name}}</option>
+		{% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+  <br>
+  <p align="center"><button type="submit"> Submit </button></p>
+</form>
+<!-- form ends -->
+</div>
 </html>
