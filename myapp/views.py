@@ -125,9 +125,9 @@ def edit_student(request,pk):
             s.last_name = last_name
             s.gender = gender
             s.dob = dob
-            s.class_id=stud_class
+            s.class_id=stud_id
             s.save()
-        return redirect('show')
+        return redirect('show_student')
     student = Student.objects.filter(id=pk)
     context = {
         "students":student
