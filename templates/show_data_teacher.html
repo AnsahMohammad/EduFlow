@@ -177,6 +177,7 @@
                 <td>{{t.address}}</td>
                 <td>
                   <a href="{% url 'edit_teacher' t.id %}"><button class="btn btn-primary"><i class="bi bi-pencil-square"></i></button></a>
+                  <a href="{% url 'delete_teacher' t.id %}">del</a>
                 </td>
               </tr>
               {% endfor %}

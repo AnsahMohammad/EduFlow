@@ -304,3 +304,8 @@ def delete_student(request,pk):
     stud = Student.objects.filter(addmission_no=pk)
     stud.delete()
     return redirect('show_student')
+
+def delete_teacher(request,pk):
+    teach = Teacher.objects.filter(teacher_id=pk)
+    teach.delete()
+    return redirect('show_teacher')

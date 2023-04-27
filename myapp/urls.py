@@ -19,5 +19,6 @@ urlpatterns = [
     path('view_student/<str:pk>',views.view_student,name='view_student'),
     path('show_classes',views.show_classes,name='show_classes'),
     path('add_class',views.add_class,name='add_class'),
-    path('delete_student/<str:pk>',views.delete_student,name='delete_student')
+    path('delete_student/<str:pk>',views.delete_student,name='delete_student'),
+    path('delete_teacher/<str:pk>',views.delete_teacher,name='delete_teacher')
 ]
