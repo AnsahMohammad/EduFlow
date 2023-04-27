@@ -129,8 +129,10 @@ def edit_student(request,pk):
             s.save()
         return redirect('show_student')
     student = Student.objects.filter(id=pk)
+    classes = Class.objects.all()
     context = {
-        "students":student
+        "students":student,
+        "classes":classes
     }
     return render(request,'edit_student.html',context)
 
