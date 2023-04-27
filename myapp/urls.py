@@ -18,5 +18,6 @@ urlpatterns = [
     path('marks_enter/<str:sub>/<str:std>',views.marks_enter,name='marks_enter'),
     path('view_student/<str:pk>',views.view_student,name='view_student'),
     path('show_classes',views.show_classes,name='show_classes'),
-    path('add_class',views.add_class,name='add_class')
+    path('add_class',views.add_class,name='add_class'),
+    path('delete_student/<str:pk>',views.delete_student,name='delete_student')
 ]

@@ -299,3 +299,8 @@ def add_class(request):
         new_class.save()
         return redirect('show_classes')
     return render(request,'add_class.html')
+
+def delete_student(request,pk):
+    stud = Student.objects.filter(addmission_no=pk)
+    stud.delete()
+    return redirect('show_student')
