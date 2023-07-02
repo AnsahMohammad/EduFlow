@@ -1,1 +1,1 @@
-web: gunicorn Eduflow.wsgi --log-file -
+web: gunicorn Eduflow.wsgi
